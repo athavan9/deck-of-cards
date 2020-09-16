@@ -3,6 +3,10 @@ const { shuffleDeck } = require('./deck-of-cards-api.js');
 const axios = require('axios')
 jest.mock('axios');
 
+beforeEach(() => {
+  jest.resetAllMocks();
+})
+
 test('shuffleDeck call api and get a deck id' , async () => {
     // Arrange
     const expectedOutput = 'ABCD';
@@ -35,10 +39,10 @@ test('shuffleDeck call api and get a deck id' , async () => {
   
 
   // Act
-  const actualOutput = await shuffleDeck('blah')
+  const actualOutput = await shuffleDeck('blah/')
   // Assert
   expect(actualOutput).toBe(expectedOutput)
   expect(axios.get).toBeCalledTimes(1)
-  expect(axios.get).toBeCalledWith('blah/api/deck/new/shuffle/?deck_count=1')
+  expect(axios.get).toBeCalledWith('blah/deck/new/shuffle/?deck_count=1')
 
 });
